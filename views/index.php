@@ -14,7 +14,7 @@ $collectionId = $config['cId'];
 $photosets = $flickr->getCollection($collectionId)->set ?>
 
 <article id="flick-gallery">
-    <?php if ($config['title']) : ?>
+    <?php if ($config['flick_title']) : ?>
             <h1 class="uk-article-title"><?= $config['flick_title'] ?></h1>
         <?php endif; ?>
         <div class="uk-clearfix">

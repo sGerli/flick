@@ -20,8 +20,9 @@ return [
         'apiKey' => '',
         'uId' => '',
         'cId' => '',
-        'title' => '',
-        'flick_text' => ''
+        'flick_title' => '',
+        'flick_text' => '',
+        'markdown_enabled' => false
     ],
     'menu' => [
         'flick' => [

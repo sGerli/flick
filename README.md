@@ -1,2 +1,2 @@
-# flick
-Pagekit Flicker gallery extension
+# Flick Gallery
+PageKit Flicker gallery extension.
