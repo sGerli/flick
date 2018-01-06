@@ -39,13 +39,16 @@ $photosets = $flickr->getCollection($collectionId)->set ?>
         <?php foreach ($photosets as $photoset): ?>
         <?php $photos = $flickr->getPhotosetPhotos($photoset->id); ?>
             <?php foreach ($photos as $photo ): ?>
-                <?php $photoUrl = $flickr->getPhotoURL($photo) ?>
+                <?php $photoUrl = $flickr->getPhotoURL($photo) ?>\
                 <div data-uk-filter="<?= $photoset->title ?>">
+                <a href="<?php echo $photo->url_k ?>" data-uk-lightbox>
                     <div class="uk-panel uk-panel-box">
                         <div class="uk-panel-teaser">
                             <img src="<?php echo $photoUrl ?>">
                         </div>
+                        
                     </div>
+                    </a>
                 </div>
             <?php endforeach ?>
         <?php endforeach ?>

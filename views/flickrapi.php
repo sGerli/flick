@@ -44,7 +44,7 @@ class FlickrAPI {
     public function getPhotosetPhotos($photosetId) {
         $response = $this->request(
             'flickr.photosets.getPhotos',
-            array('photoset_id' => $photosetId)
+            array('photoset_id' => $photosetId, 'extras' => 'url_k')
         );
         return $response->photoset->photo;
     }
