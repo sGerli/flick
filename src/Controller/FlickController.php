@@ -4,7 +4,7 @@ namespace sgerli\flick\Controller;
 
 use Pagekit\Application as App;
 
-class GalleryController
+class FlickController
 {
     /**
      * @Access(admin=true)
@@ -36,6 +36,10 @@ class GalleryController
      */
     public function siteAction()
     {
+        if (!App::node()->hasAccess(App::user())) {
+            App::abort(403, __('Insufficient User Rights.'));
+        }
+
         $module = App::module('flick');
 
         $flick_text = '';
@@ -45,11 +49,14 @@ class GalleryController
         
         return [
             '$view' => [
-                'title' => __("Gallery"),
+                'title' => __($module->config()['flick_title'] ?: App::node()->title),
                 'name' => 'flick:views/index.php'
             ],
             'config' => $module->config(),
-            'flick_text' => $flick_text
+            'flick_text' => $flick_text,
+            'node' => App::node()
         ];
     }
 }
+
+?>

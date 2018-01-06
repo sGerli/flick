@@ -10,10 +10,21 @@ return [
     'resources' => [
         'flick:' => ''
     ],
+    'nodes' => [
+
+		'flick' => [
+			'name' => '@flick',
+			'label' => 'Flick',
+			/*'controller' => 'sgerli\\flick\\Controller\\FlickController',*/
+			'protected' => true,
+			'frontpage' => true
+		]
+
+	],
     'routes' => [
-        '@flick' => [
-            'path' => '/flick',
-            'controller' => 'sgerli\\flick\\Controller\\GalleryController'
+        '/flick' => [
+            'name' => '@flick',
+            'controller' => ['sgerli\\flick\\Controller\\FlickController']
         ]
     ],
     'config' => [
