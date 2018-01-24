@@ -6,7 +6,9 @@
  */
 $view->script('flick', 'flick:js/flick.js', ['uikit-grid', 'uikit-lightbox']);
 
-include 'flickrapi.php';
+use sgerli\flick\Helpers\FlickrApi;
+
+// include 'flickrapi.php';
 $apiKey = $config['apiKey'];
 $userId = $config['uId'];
 $collectionId = $config['cId'];
