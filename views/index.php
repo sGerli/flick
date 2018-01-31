@@ -6,11 +6,16 @@
  */
 $view->script('flick', 'sgerli/flick:js/flick.js', ['uikit-grid', 'uikit-lightbox']);
 
-include 'flickrapi.php';
+use sgerli\flick\Helpers\FlickrApi;
+
+// include 'flickrapi.php';
 $apiKey = $config['apiKey'];
 $userId = $config['uId'];
-$flickr = new FlickrAPI($apiKey, $userId);
 $collectionId = $config['cId'];
+
+if ($apiKey && $userId && $collectionId) {
+$flickr = new FlickrAPI($apiKey, $userId);
+
 $photosets = $flickr->getCollection($collectionId)->set ?>
 
 <article id="flick-gallery">
@@ -54,3 +59,7 @@ $photosets = $flickr->getCollection($collectionId)->set ?>
         <?php endforeach ?>
     </div>
 </div>
+
+<?php } else {
+        echo 'Please configure in the admin section.';
+} ?>

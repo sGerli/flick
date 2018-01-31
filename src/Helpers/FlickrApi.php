@@ -25,6 +25,9 @@ $flickr = new FlickrAPI($apiKey, $userId);
     </div>
 <?php endforeach ?>
 ***************************************************************************************************/
+
+namespace sgerli\flick\Helpers;
+
 class FlickrAPI {
     const URL = 'https://api.flickr.com/services/rest/';
     
