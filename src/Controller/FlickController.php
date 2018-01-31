@@ -11,7 +11,7 @@ class FlickController
      */
     public function indexAction()
     {
-        $module = App::module('flick');
+        $module = App::module('sgerli/flick');
         return [
             '$view' => [
                 'title' => __("Flick"),
@@ -28,7 +28,7 @@ class FlickController
      */
     public function saveAction($config = [])
     {
-        App::config('flick')->merge($config, true);
+        App::config('sgerli/flick')->merge($config, true);
         return ['message' => 'success'];
     }
     /**
@@ -40,7 +40,7 @@ class FlickController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        $module = App::module('flick');
+        $module = App::module('sgerli/flick');
 
         $flick_text = '';
 		if ($module->config('flick_text')) {

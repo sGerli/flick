@@ -4,7 +4,7 @@
  * @var Pagekit\Module\Module $flick
  * @var array $config
  */
-$view->script('flick', 'flick:js/flick.js', ['uikit-grid', 'uikit-lightbox']);
+$view->script('flick', 'sgerli/flick:js/flick.js', ['uikit-grid', 'uikit-lightbox']);
 
 use sgerli\flick\Helpers\FlickrApi;
 

@@ -1,7 +1,7 @@
 <?php
 use Pagekit\Application as App;
 return [
-    'name' => 'flick',
+    'name' => 'sgerli/flick',
     'main' => function() {
     },
     'autoload' => [
@@ -50,6 +50,11 @@ return [
         ]
     ],
     'settings' => '@flick',
+	
+   'resources' => [
+        'sgerli/flick:' => '',
+    ],
+
     'events' => [
         'view.scripts' => function ($event, $scripts) use ($app) {
 

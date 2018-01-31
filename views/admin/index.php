@@ -1,4 +1,4 @@
-<?php $view->script('flick', 'flick:js/admin/flick.js', ['vue', 'editor']) ?>
+<?php $view->script('flick', 'sgerli/flick:js/admin/flick.js', ['vue', 'editor']) ?>
 
 <div id="flick-settings" class="uk-form">
 
