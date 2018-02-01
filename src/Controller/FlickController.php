@@ -15,7 +15,7 @@ class FlickController
         return [
             '$view' => [
                 'title' => __("Flick"),
-                'name' => 'flick:views/admin/index.php'
+                'name' => 'sgerli/flick:views/admin/index.php'
             ],
             '$data' => [
                 'config' => $module->config()
@@ -50,7 +50,7 @@ class FlickController
         return [
             '$view' => [
                 'title' => __($module->config()['flick_title'] ?: App::node()->title),
-                'name' => 'flick:views/index.php'
+                'name' => 'sgerli/flick:views/index.php'
             ],
             'config' => $module->config(),
             'flick_text' => $flick_text,
