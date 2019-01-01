@@ -64,7 +64,7 @@ class FlickrAPI {
     
     public function getPhotoURL($photo, $size = null) {
         return sprintf(
-            'http://farm%s.staticflickr.com/%s/%s_%s%s.jpg',
+            'https://farm%s.staticflickr.com/%s/%s_%s%s.jpg',
             $photo->farm,
             $photo->server,
             $photo->id,
