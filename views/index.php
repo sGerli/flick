@@ -4,7 +4,8 @@
  * @var Pagekit\Module\Module $flick
  * @var array $config
  */
-$view->script('flick', 'sgerli/flick:js/flick.js', ['uikit-grid', 'uikit-lightbox']);
+$view->style('flick', 'sgerli/flick:external/fancybox/jquery.fancybox.min.css');
+$view->script('flick', 'sgerli/flick:js/flick.js', ['uikit-grid', 'fancybox']);
 
 use sgerli\flick\Helpers\FlickrApi;
 
@@ -46,7 +47,7 @@ $photosets = $flickr->getCollection($collectionId)->set ?>
             <?php foreach ($photos as $photo ): ?>
                 <?php $photoUrl = $flickr->getPhotoURL($photo) ?>\
                 <div data-uk-filter="<?= $photoset->title ?>">
-                <a href="<?php echo $photo->url_k ?>" data-uk-lightbox>
+                <a href="<?php echo $photo->url_k ?>" data-caption="<h2><?php echo $photo->title ?></h2> <small><a href='<?php echo $flickr->getPhotoFlickrURL($photo) ?>'>View on Flickr</a></small>" data-fancybox>
                     <div class="uk-panel uk-panel-box">
                         <div class="uk-panel-teaser">
                             <img src="<?php echo $photoUrl ?>">

@@ -57,9 +57,8 @@ return [
 
     'events' => [
         'view.scripts' => function ($event, $scripts) use ($app) {
-
 			$scripts->register('uikit-grid', 'app/assets/uikit/js/components/grid.min.js', 'uikit');
-			$scripts->register('uikit-lightbox', 'app/assets/uikit/js/components/lightbox.min.js', 'uikit');
+            $scripts->register('fancybox', 'sgerli/flick:external/fancybox/jquery.fancybox.min.js');
 		},
     ]
 ];

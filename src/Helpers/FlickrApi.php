@@ -72,6 +72,14 @@ class FlickrAPI {
             $size ? '_' . $size : ''
         );
     }
+
+    public function getPhotoFlickrURL($photo) {
+        return sprintf(
+            'https://www.flickr.com/photos/%s/%s/',
+            $this->_userId,
+            $photo->id
+        );
+    }
     
     public function request($method, array $params = array()) {
         $defaultParams = array(
