@@ -45,12 +45,11 @@ $photosets = $flickr->getCollection($collectionId)->set ?>
         <?php foreach ($photosets as $photoset): ?>
         <?php $photos = $flickr->getPhotosetPhotos($photoset->id); ?>
             <?php foreach ($photos as $photo ): ?>
-                <?php $photoUrl = $flickr->getPhotoURL($photo) ?>\
                 <div data-uk-filter="<?= $photoset->title ?>">
                 <a href="<?php echo $photo->url_k ?>" data-caption="<h2><?php echo $photo->title ?></h2> <small><a class='linkback' href='<?php echo $flickr->getPhotoFlickrURL($photo) ?>'>View on Flickr</a></small>" data-fancybox>
                     <div class="uk-panel uk-panel-box">
                         <div class="uk-panel-teaser">
-                            <img src="<?php echo $photoUrl ?>">
+                            <img src="<?php echo $flickr->getPhotoURL($photo, 'z') ?>">
                         </div>
                         
                     </div>
