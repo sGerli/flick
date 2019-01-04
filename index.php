@@ -15,7 +15,7 @@ return [
 		'flick' => [
 			'name' => '@flick',
 			'label' => 'Flick',
-			/*'controller' => 'sgerli\\flick\\Controller\\FlickController',*/
+			'controller' => 'sgerli\\flick\\Controller\\SiteController',
 			'protected' => true,
 			'frontpage' => true
 		]
@@ -39,8 +39,8 @@ return [
         'flick' => [
             'label' => 'Flick',
             'icon'   => 'app/system/assets/images/placeholder-icon.svg',
-            'url'    => '@flick',
-            'active' => '@flick*',
+            'url'    => '@flick/settings',
+            'active' => '@flick/settings*',
             'access' => 'flick: manage settings',
         ]
     ],
@@ -49,7 +49,7 @@ return [
             'title' => 'Manage settings'
         ]
     ],
-    'settings' => '@flick',
+    'settings' => '@flick/settings',
 	
    'resources' => [
         'sgerli/flick:' => '',
