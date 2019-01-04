@@ -9,6 +9,18 @@ $view->script('flick', 'sgerli/flick:js/flick.js', ['uikit-grid', 'fancybox']);
 
 use sgerli\flick\Helpers\FlickrApi;
 
+
+function collectionToCSV($collection) {
+    $string = "";
+    foreach ($collection as $album) {
+        if (!empty($string)) {
+            $string .= ", ";
+        }
+        $string .= $album;
+    }
+    return $string;
+}
+
 // include 'flickrapi.php';
 $apiKey = $config['apiKey'];
 $userId = $config['uId'];
@@ -17,7 +29,20 @@ $collectionId = $config['cId'];
 if ($apiKey && $userId && $collectionId) {
 $flickr = new FlickrAPI($apiKey, $userId);
 
-$photosets = $flickr->getCollection($collectionId)->set ?>
+$photosets = $flickr->getCollection($collectionId)->set;
+$photoCollection = [];
+
+foreach ($photosets as $photoset):
+    $photos = $flickr->getPhotosetPhotos($photoset->id);
+    foreach ($photos as $photo):
+        if (!array_key_exists($photo->id, $photoCollection)):
+            $photo->collections = [];
+            $photoCollection[$photo->id] = $photo;
+        endif;
+        $photoCollection[$photo->id]->collections[] = $photoset->title;
+    endforeach;
+endforeach;
+?>
 
 <article id="flick-gallery">
     <?php if ($config['flick_title']) : ?>
@@ -42,20 +67,17 @@ $photosets = $flickr->getCollection($collectionId)->set ?>
     </div>
 
     <div class="uk-grid uk-grid-width-small-1-1 uk-grid-width-medium-1-3" data-uk-grid="{controls: '#flick-filter', gutter: 20}">
-        <?php foreach ($photosets as $photoset): ?>
-        <?php $photos = $flickr->getPhotosetPhotos($photoset->id); ?>
-            <?php foreach ($photos as $photo ): ?>
-                <div data-uk-filter="<?= $photoset->title ?>">
-                <a href="<?php echo $photo->url_k ?>" data-caption="<h2><?php echo $photo->title ?></h2> <small><a class='linkback' href='<?php echo $flickr->getPhotoFlickrURL($photo) ?>'>View on Flickr</a></small>" data-fancybox>
-                    <div class="uk-panel uk-panel-box">
-                        <div class="uk-panel-teaser">
-                            <img src="<?php echo $flickr->getPhotoURL($photo, 'z') ?>">
-                        </div>
-                        
+        <?php foreach ($photoCollection as $photo ): ?>
+            <div data-uk-filter="<?= collectionToCSV($photo->collections) ?>">
+            <a href="<?php echo $photo->url_k ?>" data-caption="<h2><?php echo $photo->title ?></h2> <small><a class='linkback' href='<?php echo $flickr->getPhotoFlickrURL($photo) ?>'>View on Flickr</a></small>" data-fancybox>
+                <div class="uk-panel uk-panel-box">
+                    <div class="uk-panel-teaser">
+                        <img src="<?php echo $flickr->getPhotoURL($photo, 'z') ?>">
                     </div>
-                    </a>
+                    
                 </div>
-            <?php endforeach ?>
+                </a>
+            </div>
         <?php endforeach ?>
     </div>
 </div>
