@@ -22,26 +22,29 @@ function collectionToCSV($collection) {
 }
 
 // include 'flickrapi.php';
-$apiKey = $config['apiKey'];
-$userId = $config['uId'];
-$collectionId = $config['cId'];
+$error = null;
 
-if ($apiKey && $userId && $collectionId) {
-$flickr = new FlickrAPI($apiKey, $userId);
-
-$photosets = $flickr->getCollection($collectionId)->set;
-$photoCollection = [];
-
-foreach ($photosets as $photoset):
-    $photos = $flickr->getPhotosetPhotos($photoset->id);
-    foreach ($photos as $photo):
-        if (!array_key_exists($photo->id, $photoCollection)):
-            $photo->collections = [];
-            $photoCollection[$photo->id] = $photo;
-        endif;
-        $photoCollection[$photo->id]->collections[] = $photoset->title;
+try {
+    $apiKey = $config['apiKey'];
+    $userId = $config['uId'];
+    $collectionId = $config['cId'];
+    
+    if ($apiKey && $userId && $collectionId) {
+    $flickr = new FlickrAPI($apiKey, $userId);
+    
+    $photosets = $flickr->getCollection($collectionId)->set;
+    $photoCollection = [];
+    
+    foreach ($photosets as $photoset):
+        $photos = $flickr->getPhotosetPhotos($photoset->id);
+        foreach ($photos as $photo):
+            if (!array_key_exists($photo->id, $photoCollection)):
+                $photo->collections = [];
+                $photoCollection[$photo->id] = $photo;
+            endif;
+            $photoCollection[$photo->id]->collections[] = $photoset->title;
+        endforeach;
     endforeach;
-endforeach;
 ?>
 
 <article id="flick-gallery">
@@ -84,4 +87,9 @@ endforeach;
 
 <?php } else {
         echo 'Please configure in the admin section.';
-} ?>
+    }
+
+} catch (Exception $e) {
+    echo 'An error ocurred while fetching from the Flickr API: '. $e->getMessage();
+}
+?>
